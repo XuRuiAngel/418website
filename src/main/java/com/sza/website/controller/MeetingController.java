@@ -1,6 +1,9 @@
 package com.sza.website.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sza.website.entity.Meeting;
 import com.sza.website.service.MeetingService;
@@ -56,12 +59,12 @@ public class MeetingController {
         return Result.ok(meetingService.removeById(id), "删除成功");
     }
 
-    @GetMapping("/notice")
-    public Result<?> noticePeople(List<String> emails, Integer id) {
+    @PostMapping("/notice")
+    public Result<?> noticePeople(String emails, Integer meetingId) {
+        JSONArray jsonArray = JSONArray.parseArray(emails);
+        meetingService.email(jsonArray, meetingId);
         return null;
     }
-
-
 
 }
 

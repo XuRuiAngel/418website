@@ -5,25 +5,17 @@ package com.sza.website.constant;
  * mq常量
  */
 public class MQPrefixConst {
-
     /**
-     * maxwell交换机
+     * 通知交换机
      */
-    public static final String MAXWELL_EXCHANGE = "maxwell_exchange";
-
-    /**
-     * maxwell队列
-     */
-    public static final String MAXWELL_QUEUE = "maxwell_queue";
-
-    /**
-     * email交换机
-     */
-    public static final String EMAIL_EXCHANGE = "email_exchange";
+    public static final String NOTICE_EXCHANGE = "notice_direct_exchange";
 
     /**
      * 邮件通知队列
      */
-    public static final String NOTICE_QUEUE = "notice_queue";
+    public static final String NOTICE_EMAIL_QUEUE = "notice_email_queue";
+
+    public static final String NOTICE_EMAIL_ROUTINGKEY = "email";
+
 
 }
