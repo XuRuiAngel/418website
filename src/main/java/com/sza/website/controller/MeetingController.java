@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -50,7 +51,14 @@ public class MeetingController {
 
     @DeleteMapping("")
     public Result<?> deleteMeeting(Integer id) {
+        if (id == null) return Result.fail("id不能为空");
+        if (meetingService.getById(id) == null) return Result.fail("该id的会议不存在");
         return Result.ok(meetingService.removeById(id), "删除成功");
+    }
+
+    @GetMapping("/notice")
+    public Result<?> noticePeople(List<String> emails, Integer id) {
+        return null;
     }
 
 
