@@ -1,6 +1,7 @@
 package com.sza.website.controller;
 
 
+import com.sza.website.entity.ProjectGroup;
 import com.sza.website.enums.StatusCodeEnum;
 import com.sza.website.service.ProjectGroupService;
 import com.sza.website.vo.GroupVo;
@@ -13,7 +14,7 @@ import java.text.ParseException;
 
 /**
  * <p>
- *  前端控制器
+ *  课题组前端控制器
  * </p>
  *
  * @author hzw
@@ -34,7 +35,7 @@ public class ProjectGroupController {
     @GetMapping("")
     public Result<?> listGroups() {
 
-        return Result.ok(projectGroupService.listMaps(), StatusCodeEnum.SUCCESS.getMsg());
+        return Result.ok(projectGroupService.listMaps(), StatusCodeEnum.SUCCESS);
 
     }
 
@@ -46,15 +47,15 @@ public class ProjectGroupController {
      * @throws ParseException
      */
     @PostMapping("")
-    public Result<?> addOrUpdate(@Valid GroupVo groupVo) throws ParseException {
+    public Result<?> addOrUpdateGroup(@Valid GroupVo groupVo) {
 
         if(groupVo.getId() == null) {
-            return Result.ok(projectGroupService.addOrUpdateGroup(groupVo), StatusCodeEnum.ADD_SUCCESS.getMsg());
+            return Result.ok(projectGroupService.addOrUpdateGroup(groupVo), StatusCodeEnum.ADD_SUCCESS);
         } else {
             if(projectGroupService.getById(groupVo.getId()) == null) {
-                return Result.fail(StatusCodeEnum.UPDATE_FAIL.getCode(), StatusCodeEnum.UPDATE_FAIL.getMsg());
+                return Result.fail(StatusCodeEnum.UPDATE_FAIL);
             } else {
-                return Result.ok(projectGroupService.addOrUpdateGroup(groupVo), StatusCodeEnum.UPDATE_SUCCESS.getMsg());
+                return Result.ok(projectGroupService.addOrUpdateGroup(groupVo), StatusCodeEnum.UPDATE_SUCCESS);
             }
         }
 
@@ -69,12 +70,11 @@ public class ProjectGroupController {
     @DeleteMapping("")
     public Result<?> deleteGroup(Integer id) {
 
-        if(id == null) return Result.fail(StatusCodeEnum.DELETE_FAIL.getCode(), StatusCodeEnum.DELETE_FAIL.getMsg());
-        if(projectGroupService.getById(id) == null) return Result.fail(StatusCodeEnum.DELETE_FAIL.getCode(), StatusCodeEnum.DELETE_FAIL.getMsg());
+        if(id == null) return Result.fail(StatusCodeEnum.DELETE_FAIL);
+        if(projectGroupService.getById(id) == null) return Result.fail(StatusCodeEnum.DELETE_FAIL);
         return Result.ok(projectGroupService.removeById(id), StatusCodeEnum.DELETE_SUCCESS.getMsg());
 
     }
-
 
     /**
      * 根据ID查看指定课题组信息
@@ -85,13 +85,12 @@ public class ProjectGroupController {
     @GetMapping("/{id}")
     public Result<?> getGroupById(@PathVariable("id") Integer id) {
 
-        if(id == null) return Result.fail(StatusCodeEnum.SEARCH_FAIL.getCode(), StatusCodeEnum.SEARCH_FAIL.getMsg());
-        if(projectGroupService.getById(id) == null) return Result.fail(StatusCodeEnum.SEARCH_FAIL.getCode(), StatusCodeEnum.SEARCH_FAIL.getMsg());
-        return Result.ok(projectGroupService.getById(id), StatusCodeEnum.SEARCH_SUCCESS.getMsg());
+        if(id == null) return Result.fail(StatusCodeEnum.SEARCH_FAIL);
+        ProjectGroup projectGroup = projectGroupService.getById(id);
+        if(projectGroup == null) return Result.fail(StatusCodeEnum.SEARCH_FAIL);
+        return Result.ok(projectGroup, StatusCodeEnum.SEARCH_SUCCESS);
 
     }
-
-
 
 }
 

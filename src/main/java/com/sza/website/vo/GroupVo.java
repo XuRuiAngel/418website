@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @author hzw
  * @version 1.0.0
  * @ClassName GroupVO.java
- * @Description TODO
+ * @Description 课题组前端连接类
  * @createTime 2021_11_06 14:32:00
  */
 @AllArgsConstructor

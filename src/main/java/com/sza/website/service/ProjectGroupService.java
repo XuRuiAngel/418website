@@ -8,7 +8,7 @@ import java.text.ParseException;
 
 /**
  * <p>
- *  服务类
+ *  课题组服务类
  * </p>
  *
  * @author hzw
@@ -16,6 +16,6 @@ import java.text.ParseException;
  */
 public interface ProjectGroupService extends IService<ProjectGroup> {
 
-    boolean addOrUpdateGroup(GroupVo groupVo) throws ParseException;
+    boolean addOrUpdateGroup(GroupVo groupVo);
 
 }

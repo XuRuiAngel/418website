@@ -43,6 +43,14 @@ public class Result<T> {
         return restResult(true, data, SUCCESS.getCode(), message);
     }
 
+    public static <T> Result<T> ok(StatusCodeEnum statusCodeEnum) {
+        return restResult(true, null, statusCodeEnum.getCode(), statusCodeEnum.getMsg());
+    }
+
+    public static <T> Result<T> ok(T data, StatusCodeEnum statusCodeEnum) {
+        return restResult(true, data, statusCodeEnum.getCode(), statusCodeEnum.getMsg());
+    }
+
     public static <T> Result<T> fail() {
         return restResult(false, null, FAIL.getCode(), FAIL.getMsg());
     }

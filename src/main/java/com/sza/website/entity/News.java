@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- *  课题组实体类
+ *  新闻实体类
  * </p>
  *
  * @author hzw
@@ -20,20 +20,40 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ProjectGroup implements Serializable {
+public class News implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 课题组id
+     * 新闻id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 课题组名称
+     * 标题
      */
-    private String groupName;
+    private String title;
+
+    /**
+     * 作者
+     */
+    private String author;
+
+    /**
+     * 发布者
+     */
+    private String publisher;
+
+    /**
+     * 点击量
+     */
+    private Integer clickNum;
+
+    /**
+     * 图片
+     */
+    private String image;
 
     /**
      * 创建时间
@@ -42,21 +62,27 @@ public class ProjectGroup implements Serializable {
     private Date createTime;
 
     /**
-     * 上次修改时间
+     * 修改时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /**
-     * 逻辑删除字段
+     * 是否删除
      */
     @TableLogic
     private Integer deleted;
 
     /**
-     * 课题组简介
+     * 课题组id
      */
-    private String description;
+    @TableField("groupId")
+    private Integer groupId;
+
+    /**
+     * 新闻类型
+     */
+    private String newsType;
 
 
 }
