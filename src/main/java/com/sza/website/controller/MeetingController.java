@@ -1,6 +1,9 @@
 package com.sza.website.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sza.website.entity.Meeting;
 import com.sza.website.service.MeetingService;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -37,7 +41,12 @@ public class MeetingController {
     @PostMapping("")
     public Result<?> addOrUpdateMeeting(@Valid  MeetingVo meetingVo) throws ParseException {
         meetingService.addOrUpdateMeeting(meetingVo);
-        return Result.ok();
+        if (meetingVo.getId() == null) {
+            return Result.ok("更新成功!!");
+        } else {
+            return Result.ok("添加成功!!");
+        }
+
     }
 
     @GetMapping("/future")
@@ -50,10 +59,17 @@ public class MeetingController {
 
     @DeleteMapping("")
     public Result<?> deleteMeeting(Integer id) {
+        if (id == null) return Result.fail("id不能为空");
+        if (meetingService.getById(id) == null) return Result.fail("该id的会议不存在");
         return Result.ok(meetingService.removeById(id), "删除成功");
     }
 
-
+    @PostMapping("/notice")
+    public Result<?> noticePeople(String emails, Integer meetingId) {
+        JSONArray jsonArray = JSONArray.parseArray(emails);
+        meetingService.email(jsonArray, meetingId);
+        return Result.ok("邮件通知成功");
+    }
 
 }
 
