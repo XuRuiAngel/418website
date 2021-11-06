@@ -69,6 +69,5 @@ public class MeetingServiceImpl extends ServiceImpl<MeetingMapper, Meeting> impl
             emailDTO.setEmail(emails.getJSONObject(i).getString("email"));
             rabbitTemplate.convertAndSend(NOTICE_EXCHANGE, NOTICE_EMAIL_ROUTINGKEY, new Message(JSON.toJSONBytes(emailDTO), new MessageProperties()));
         }
-
     }
 }

@@ -41,7 +41,12 @@ public class MeetingController {
     @PostMapping("")
     public Result<?> addOrUpdateMeeting(@Valid  MeetingVo meetingVo) throws ParseException {
         meetingService.addOrUpdateMeeting(meetingVo);
-        return Result.ok();
+        if (meetingVo.getId() == null) {
+            return Result.ok("更新成功!!");
+        } else {
+            return Result.ok("添加成功!!");
+        }
+
     }
 
     @GetMapping("/future")
@@ -63,7 +68,7 @@ public class MeetingController {
     public Result<?> noticePeople(String emails, Integer meetingId) {
         JSONArray jsonArray = JSONArray.parseArray(emails);
         meetingService.email(jsonArray, meetingId);
-        return null;
+        return Result.ok("邮件通知成功");
     }
 
 }
