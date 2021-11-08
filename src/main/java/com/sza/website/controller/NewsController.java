@@ -2,12 +2,15 @@ package com.sza.website.controller;
 
 
 import com.sza.website.entity.News;
+import com.sza.website.enums.FilePathEnum;
 import com.sza.website.enums.StatusCodeEnum;
 import com.sza.website.service.NewsService;
+import com.sza.website.strategy.context.UploadStrategyContext;
 import com.sza.website.vo.NewsVo;
 import com.sza.website.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -26,7 +29,10 @@ import java.util.List;
 public class NewsController {
 
     @Autowired
-    NewsService newsService;
+    private NewsService newsService;
+
+    @Autowired
+    private UploadStrategyContext uploadStrategyContext;
 
     /**
      * 得到所有新闻信息
@@ -94,6 +100,18 @@ public class NewsController {
 //
 //    }
 
+    /**
+     * 上传新闻图片
+     *
+     * @param file 文件
+     * @return {@link Result<String>} 新闻图片地址
+     */
+    @PostMapping("/images")
+    public Result<String> saveArticleImages(MultipartFile file) {
+
+        return Result.ok(uploadStrategyContext.executeUploadStrategy(file, FilePathEnum.NEWS.getPath()));
+
+    }
 
     /**
      * 根据ID查看指定新闻信息
