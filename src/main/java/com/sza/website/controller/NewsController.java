@@ -54,51 +54,50 @@ public class NewsController {
      * @throws ParseException
      */
     @PostMapping("")
-    public Result<?> addOrUpdateNew(@Valid NewsVo newsVo) {
+    public Result<?> addOrUpdateNews(@Valid NewsVo newsVo) {
 
         if(newsVo.getId() == null) {
-            return Result.ok(newsService.addOrUpdateNew(newsVo), StatusCodeEnum.ADD_SUCCESS);
+            return Result.ok(newsService.addOrUpdateNews(newsVo), StatusCodeEnum.ADD_SUCCESS);
         } else {
             if(newsService.getById(newsVo.getId()) == null) {
                 return Result.fail(StatusCodeEnum.UPDATE_FAIL);
             } else {
-                return Result.ok(newsService.addOrUpdateNew(newsVo), StatusCodeEnum.UPDATE_SUCCESS);
+                return Result.ok(newsService.addOrUpdateNews(newsVo), StatusCodeEnum.UPDATE_SUCCESS);
             }
         }
 
     }
 
     /**
-     * 删除新闻信息
+     * 根据ID删除新闻信息
      *
      * @param id
      * @return
      */
-    @DeleteMapping("")
-    public Result<?> deleteNew(Integer id) {
+    @DeleteMapping("/{id}")
+    public Result<?> deleteNews(@PathVariable("id") Integer id) {
 
-        if(id == null) return Result.fail(StatusCodeEnum.DELETE_FAIL);
         if(newsService.getById(id) == null) return Result.fail(StatusCodeEnum.DELETE_FAIL);
         return Result.ok(newsService.removeById(id), StatusCodeEnum.DELETE_SUCCESS);
 
     }
 
-//    /**
-//     * 删除新闻
-//     *
-//     * @param idList
-//     * @return
-//     */
-//    @DeleteMapping("")
-//    public Result<?> deleteNews(List<Integer> idList) {
-//
-//        if(idList.size() == 0) {
-//            return Result.fail(StatusCodeEnum.DELETE_FAIL);
-//        } else {
-//            return Result.ok(newsService.removeByIds(idList), StatusCodeEnum.DELETE_SUCCESS);
-//        }
-//
-//    }
+    /**
+     * 批量删除新闻
+     *
+     * @param idList
+     * @return
+     */
+    @DeleteMapping("")
+    public Result<?> deleteNews(List<Integer> idList) {
+
+        if(idList.size() == 0) {
+            return Result.fail(StatusCodeEnum.DELETE_FAIL);
+        } else {
+            return Result.ok(newsService.removeByIds(idList), StatusCodeEnum.DELETE_SUCCESS);
+        }
+
+    }
 
     /**
      * 上传新闻图片
@@ -122,7 +121,6 @@ public class NewsController {
     @GetMapping("/{id}")
     public Result<?> getNewById(@PathVariable("id") Integer id) {
 
-        if(id == null) return Result.fail(StatusCodeEnum.SEARCH_FAIL.getCode(), StatusCodeEnum.SEARCH_FAIL.getMsg());
         News news = newsService.getById(id);
         if(news == null) return Result.fail(StatusCodeEnum.SEARCH_FAIL);
         return Result.ok(news, StatusCodeEnum.SEARCH_SUCCESS);

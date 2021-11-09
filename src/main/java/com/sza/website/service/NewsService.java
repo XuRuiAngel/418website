@@ -16,6 +16,11 @@ import java.text.ParseException;
  */
 public interface NewsService extends IService<News> {
 
-    boolean addOrUpdateNew(NewsVo newsVo);
+    /**
+     * 增加或者删除新闻
+     * @param newsVo 新闻前端接收类
+     * @return
+     */
+    boolean addOrUpdateNews(NewsVo newsVo);
 
 }
