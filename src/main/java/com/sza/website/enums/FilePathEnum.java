@@ -22,7 +22,12 @@ public enum FilePathEnum {
     /**
      * 新闻路径
      */
-    NEWS("news/", "新闻路径");
+    NEWS("news/", "新闻路径"),
+
+    /**
+     * 主页路径
+     */
+    HOMEPAGE("homepage/", "主页路径");
 
     /**
      * 路径

@@ -18,7 +18,7 @@ public interface NewsService extends IService<News> {
 
     /**
      * 增加或者删除新闻
-     * @param newsVo 新闻前端接收类
+     * @param newsVo
      * @return
      */
     boolean addOrUpdateNews(NewsVo newsVo);
