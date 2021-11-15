@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author hzw
  * @version 1.0.0
@@ -28,11 +30,13 @@ public class GroupVo {
     /**
      * 课题组名称
      */
+    @NotBlank(message = "课题组名称不能为空")
     private String groupName;
 
     /**
      * 课题组简介
      */
+    @NotBlank(message = "课题组简介不能为空")
     private String description;
 
 }

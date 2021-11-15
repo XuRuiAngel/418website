@@ -16,6 +16,11 @@ import java.text.ParseException;
  */
 public interface ProjectGroupService extends IService<ProjectGroup> {
 
+    /**
+     * 增加或者删除课题组
+     * @param groupVo
+     * @return
+     */
     boolean addOrUpdateGroup(GroupVo groupVo);
 
 }

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author hzw
  * @version 1.0.0
@@ -27,11 +29,13 @@ public class NewsVo {
     /**
      * 标题
      */
+    @NotBlank(message = "新闻标题不能为空")
     private String title;
 
     /**
      * 作者
      */
+    @NotBlank(message = "新闻作者不能为空")
     private String author;
 
     /**
@@ -47,11 +51,13 @@ public class NewsVo {
     /**
      * 课题组id
      */
+    @NotBlank(message = "新闻所属课题组id不能为空")
     private Integer groupId;
 
     /**
      * 新闻类型
      */
+    @NotBlank(message = "新闻类型不能为空")
     private String newsType;
 
 }
