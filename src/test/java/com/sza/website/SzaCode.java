@@ -60,7 +60,7 @@ public class SzaCode {
 
         // 4.策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("homepage", "research_direction"); // 要映射的表名
+        strategy.setInclude("achievement"); // 要映射的表名
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);
