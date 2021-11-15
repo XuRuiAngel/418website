@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -52,9 +53,8 @@ public class UnluckyController {
         return Result.ok(unluckyService.listMaps(wrapper), "ok");
     }
 
-    @DeleteMapping("")
-    public Result<?> deleteUnlucky(Integer id) {
-        if (id == null) return Result.fail("id不能为空");
+    @DeleteMapping("/{id}")
+    public Result<?> deleteUnlucky(@PathParam("id") Integer id) {
         if (unluckyService.getById(id) == null) return Result.fail("该id的值日记录不存在!");
         unluckyService.removeById(id);
         return Result.ok("删除成功!");

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -57,9 +58,8 @@ public class MeetingController {
         return Result.ok(meetingService.listMaps(wrapper), "操作成功");
     }
 
-    @DeleteMapping("")
-    public Result<?> deleteMeeting(Integer id) {
-        if (id == null) return Result.fail("id不能为空");
+    @DeleteMapping("/{id}")
+    public Result<?> deleteMeeting(@PathParam("id") Integer id) {
         if (meetingService.getById(id) == null) return Result.fail("该id的会议不存在");
         return Result.ok(meetingService.removeById(id), "删除成功");
     }
